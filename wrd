@@ -1,0 +1,66 @@
+#!/usr/bin/python
+"""
+Program that randomly prints a Bible scripture from a list array.
+Scriptures chosen at random from shuffled (in place) list.
+Hence, two levels of randomization are employed since neither is
+truly random.
+List array located in a separate file/module (scripturelist.py).
+NOTE - dependency issue: Must install termcolor module
+Jeff Tomkins, 4-16-2010, jtomkins@icr.org
+Developed on mac os 10.6 w/ python 2.6 - also runs on deb linux
+Added 'f' argument and modified help (-h) on 6-8-2010
+"""
+
+from scriptures import scripturelist #list array import
+from random import choice
+from random import shuffle
+import textwrap
+from termcolor import colored
+import sys
+
+sl = scripturelist
+blue_on_white = lambda x: colored(x, 'blue', 'on_white')
+
+if (len(sys.argv) > 1):
+
+    if(sys.argv[1] == '-h'):  #Print help info
+        print "\nWelcome to wrd: a python program that prints random scriptures."
+        print "Scriptures are randomly retrieved from an imported list array.\n"
+        print "The scripture list located in the ./scriptures.py module can be edited"
+        print "(add/remove scriptures) as long as the python list rules are followed.\n"
+        print "Arguments:\nNo args = a single random scripture"
+        print "-h = help\n-l = list length (total number of scriptures)"
+        print "-p = prints entire scripture list from ./scriptures.py"
+        print "-f <pattern> = returns scripture matches based on <pattern>"
+        print "NOTE - the '-f' arg is case insensitive\n"
+
+    elif(sys.argv[1] == '-l'):  #Print list array length
+        print "Scripture list length:", len(sl)
+
+    elif(sys.argv[1] == '-p'):  #Print whole list array
+        for x in  sl:
+            each = textwrap.fill(x, width=60)
+            print blue_on_white(each)
+            print ""
+
+    elif(sys.argv[1] == '-f'):  #Find scripture based on regex
+        import re
+        import sys
+        word = sys.argv[2]
+        scriptures = open("/Users/jtomkins/bin/scriptures.py", "r") #Make sure path is correct here
+        regex = re.compile(word, re.IGNORECASE)
+        for line in scriptures:
+            matches = regex.findall(line)
+            for match in matches:
+                each = textwrap.fill(line, width=60)
+                print blue_on_white(each),"\n"
+
+else:
+    shuffle(sl)
+    s = choice(sl)
+    t = textwrap.fill(s, width=60)
+    print blue_on_white(t)
+
+exit()
+
+

@@ -1,0 +1,39 @@
+NOTE! This info file assumes you are familiar with the UNIX
+terminal and basic commands and setup protocols.
+
+Welcome to 'wrd': a python-based terminal program that prints
+random scriptures. Scripture is randomly retrieved from an
+imported list array. Has a search argument '-f' and other args for
+list array and help info (see text below).
+
+This program works for mac os 10.4 to 10.7 and has also worked on
+debian linux variants. Python version 2.3 to 2.7 is required. Not
+sure how it would work with python 3.* versions.
+
+To install: Place the wrd-pkg directory in some logical place 
+and create a symbolic link to the wrd executable in your path. 
+
+You can also add the command 'wrd' to your .profile, .bash_profile,
+.bashrc, etc to pop up a new scripture every time a new shell is
+launched. Also works in a tcsh shell env.
+
+The scripture list array located in the ./scriptures.py module 
+can be edited (add/remove scriptures) as long as the python list
+rules are followed.
+
+Arguments:
+No args = a single random scripture
+-h = help
+-l = list length (total number of scriptures)
+-p = prints entire scripture list from ./scriptures.py
+-f <pattern> = returns scripture matches based on <pattern>
+NOTE - the '-f' arg is case insensitive
+
+Final Note!: There is an included script named 'wd.sh' that
+can be used to print more than one scripture at a time (up to 7X).
+Install by making a copy of the script in your path and removing
+the 'sh' extension.
+
+Author: JP Tomkins <jtomkins@me.com>
+Last edit 1/11/12
+
